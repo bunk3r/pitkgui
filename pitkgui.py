@@ -70,15 +70,11 @@ def get_volts():
 class PitkGui:
   def __init__(self, parent):
 
-	#--- costanti per il controllo della disposizione dei
 	#--- pulsanti
-	larghezza_pulsanti = 8
-	imb_pulsantex = "3m"
-	imb_pulsantey = "1m"
-	imb_button_squarex = 5
-	imb_button_squarey = 5
-	imb_int_button_squarex = 1
-	imb_int_button_squarey = 1
+	but_width = 8
+	but_height = 0
+	but_padx = "3m"
+	but_pady = "1m"
 	#--------------------- fine costanti -----------------------
 
 	self.myParent = parent
@@ -98,6 +94,8 @@ class PitkGui:
 		#relief=RAISED, borderwidth=1
 	)
 	self.button_square.pack(side = TOP,
+	  padx=5,
+	  pady=5,
 	  fill = BOTH,
 	  expand = YES,
 	)
@@ -118,6 +116,8 @@ class PitkGui:
 
 	# Il quadro dei pulsanti basso
 	self.bottom_square = Frame(self.myBox1,
+		padx=5,
+		pady=5,
 		#background = "black",
 		#relief=RAISED, borderwidth=1
 	)
@@ -270,48 +270,44 @@ class PitkGui:
 	)
 
 	# Vengono ora aggiunti i pulsanti a 'button_square'
-	self.pulsante1 = Button(self.button_square,
-							command = self.buttonPress1)
+	self.pulsante1 = Button(self.button_square, command = self.buttonPress1)
 	self.pulsante1.configure(text = "startx")
 	self.pulsante1.focus_force()
 	self.pulsante1.configure(
-	  width = larghezza_pulsanti,
-	  padx = imb_pulsantex,
-	  pady = imb_pulsantey
+	  width = but_width, height = but_height,
+	  padx = but_padx,
+	  pady = but_pady
 	  )
 	self.pulsante1.pack(side = LEFT)
 	self.pulsante1.bind("<Return>", self.buttonPress1_a)
 
-	self.pulsante2 = Button(self.button_square,
-							command = self.buttonPress2)
+	self.pulsante2 = Button(self.button_square, command = self.buttonPress2)
 	self.pulsante2.configure(text = "Exit")
 	self.pulsante2.configure(
-	  width = larghezza_pulsanti,
-	  padx = imb_pulsantex,
-	  pady = imb_pulsantey
+	  width = but_width, height = but_height,
+	  padx = but_padx,
+	  pady = but_pady
 	  )
 	self.pulsante2.pack(side = RIGHT)
 	self.pulsante2.bind("<Return>", self.buttonPress2_a)
 
-	self.pulsante3 = Button(self.bottom_square,
-							command = self.buttonPress3)
+	self.pulsante3 = Button(self.bottom_square, command = self.buttonPress3)
 	self.pulsante3.configure(text = "Reboot")
 	self.pulsante3.focus_force()
 	self.pulsante3.configure(
-	  width = larghezza_pulsanti,
-	  padx = imb_pulsantex,
-	  pady = imb_pulsantey
+	  width = but_width, height = but_height,
+	  padx = but_padx,
+	  pady = but_pady
 	  )
 	self.pulsante3.pack(side = LEFT)
 	self.pulsante3.bind("<Return>", self.buttonPress3_a)
 
-	self.pulsante4 = Button(self.bottom_square,
-							command = self.buttonPress4)
+	self.pulsante4 = Button(self.bottom_square, command = self.buttonPress4)
 	self.pulsante4.configure(text = "Shutdown")
 	self.pulsante4.configure(
-	  width = larghezza_pulsanti,
-	  padx = imb_pulsantex,
-	  pady = imb_pulsantey
+	  width = but_width, height = but_height,
+	  padx = but_padx,
+	  pady = but_pady
 	  )
 	self.pulsante4.pack(side = RIGHT)
 	self.pulsante4.bind("<Return>", self.buttonPress4_a)
