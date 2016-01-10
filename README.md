@@ -7,8 +7,8 @@ Due to Pygame+touchscreen problems in Jessie, it's time to use Tkinter.
 
 console config:
 
- 	- Launch with:  `xinit /usr/bin/python /path/to/pitkgui/pitkgui.py`
+- Launch with:  `xinit /usr/bin/python /path/to/pitkgui/pitkgui.py`
  
- 	- Autostart from console: 
- 		1. add `xinit /usr/bin/python /home/pi/Develop/pitkgui/pitkgui.py` to /home/pi/.profile
- 		2. autologin to console with raspi-config
+- Autostart from console: 
+ * add `xinit /usr/bin/python /home/pi/Develop/pitkgui/pitkgui.py` to /home/pi/.profile
+ * autologin to console with raspi-config
