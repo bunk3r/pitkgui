@@ -25,17 +25,15 @@ def startx():
 # Restart Raspberry Pi
 def restart():
 	command = "/usr/bin/sudo /sbin/shutdown -r now"
-	#process = Popen(command.split(), stdout=PIPE)
-	#output = process.communicate()[0]
-	output = "RESTART!!!"
+	process = Popen(command.split(), stdout=PIPE)
+	output = process.communicate()[0]
 	return output
 
 # Shutdown Raspberry Pi
 def shutdown():
 	command = "/usr/bin/sudo /sbin/shutdown -h now"
-	#process = Popen(command.split(), stdout=PIPE)
-	#output = process.communicate()[0]
-	output = "SHUTDOWN!!!"
+	process = Popen(command.split(), stdout=PIPE)
+	output = process.communicate()[0]
 	return output
 
 # Get time and date
@@ -75,10 +73,10 @@ class PitkGui:
 	but_height = 0
 	but_padx = "3m"
 	but_pady = "1m"
-	#--------------------- fine costanti -----------------------
+	#--------------------- fine costanti ----------------
 
 	self.myParent = parent
-
+	#--------------------- FRAMES -----------------------
 	### Il quadro principale si chiama 'myBox1'
 	self.myBox1 = Frame(parent, 
 		#background="black"
@@ -147,7 +145,7 @@ class PitkGui:
 	  fill = BOTH,
 	  expand = YES,
 	)
-
+	#--------------------- FIXED LABELS -----------------------
 	# etichette sinistra
 	# IP
 	self.label1 = Label(self.left_square, 
@@ -210,7 +208,7 @@ class PitkGui:
 	)
 	
 
-
+	#--------------------- VAR LABELS -----------------------
 	# etichette destra
 	self.label1var = Label(self.right_square, 
 		#background="black", foreground="green",
@@ -223,11 +221,11 @@ class PitkGui:
 		expand = YES
 	)
 	
-	var_temp = StringVar();
-	var_temp.set(get_temp());
+	#var_temp = StringVar();
+	#var_temp.set(get_temp());
 	self.label2var = Label(self.right_square, 
 		#background="black", foreground="green",
-		textvariable=var_temp, 
+		#textvariable=var_temp, 
 		anchor='w', 
 		font="-weight bold",
 	)
@@ -236,11 +234,11 @@ class PitkGui:
 		expand = YES
 	)
 	
-	var_date = StringVar()
-	var_date.set(get_date())
+	#var_date = StringVar()
+	#var_date.set(get_date())
 	self.label3var = Label(self.right_square, 
 		#background="black", foreground="green",
-		textvariable=var_date, 
+	#	textvariable=var_date, 
 		anchor='w', 
 		font="-weight bold",
 	)
@@ -268,8 +266,9 @@ class PitkGui:
 		fill=X, 
 		expand = YES
 	)
-
+	
 	# Vengono ora aggiunti i pulsanti a 'button_square'
+	#--------------------- TOP BUTTONS -----------------------
 	self.pulsante1 = Button(self.button_square, command = self.buttonPress1)
 	self.pulsante1.configure(text = "startx")
 	self.pulsante1.focus_force()
@@ -291,6 +290,7 @@ class PitkGui:
 	self.pulsante2.pack(side = RIGHT)
 	self.pulsante2.bind("<Return>", self.buttonPress2_a)
 
+	#-------------------- BOTTOM BUTTONS ----------------------
 	self.pulsante3 = Button(self.bottom_square, command = self.buttonPress3)
 	self.pulsante3.configure(text = "Reboot")
 	self.pulsante3.focus_force()
@@ -325,6 +325,7 @@ class PitkGui:
   def buttonPress4(self):
 	shutdown();
 
+  # event management (not really used now)
   def buttonPress1_a(self, event):
 	self.buttonPress1()
   def buttonPress2_a(self, event):
@@ -333,7 +334,8 @@ class PitkGui:
 	self.buttonPress3()
   def buttonPress4_a(self, event):
 	self.buttonPress4()
-	
+  
+  # REFRESH VARS
   def do_refresh(self, date, temp):
 	var_date = StringVar()
 	var_date.set(date)
@@ -354,5 +356,5 @@ def task():
 	pitkGui.do_refresh(get_date(), get_temp())
 	root.after(1000, task)
 
-root.after(1000, task)
+root.after(0, task)
 root.mainloop()
