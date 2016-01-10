@@ -5,4 +5,10 @@ A tkinter GUI for raspberry pi + adafruit 2.8 display (pitft)
 
 Due to Pygame+touchscreen problems in Jessie, it's time to use Tkinter.
 
-Launch with:  `xinit /usr/bin/python /path/to/pitkgui/pitkgui.py`
+console config:
+
+ 	- Launch with:  `xinit /usr/bin/python /path/to/pitkgui/pitkgui.py`
+ 
+ 	- Autostart from console: 
+ 		1. add `xinit /usr/bin/python /home/pi/Develop/pitkgui/pitkgui.py` to /home/pi/.profile
+ 		2. autologin to console with raspi-config
