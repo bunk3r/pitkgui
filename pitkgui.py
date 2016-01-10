@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-import sys, os, subprocess, time, socket
+import sys, os, time, socket
 from Tkinter import *
+from tkFont import Font
 from subprocess import *
 
 # Get Your External IP Address
@@ -68,14 +69,26 @@ def get_volts():
 class PitkGui:
   def __init__(self, parent):
 
+	#--- labels
+	labFont = Font(family="Courier", size=11)
+	labFont.configure(weight = "bold")
+	
 	#--- pulsanti
-	but_width = 8
+	butFont = Font(family="Helvetica", size=11)
+	butFont.configure(weight = "bold")
+	but_width = 10
 	but_height = 0
 	but_padx = "3m"
 	but_pady = "1m"
+	but_relief = FLAT
+	but_borderwidth = 1
+	but_hlbg = "red"
+	but_bg = "red"
+	but_fg = "white"
 	#--------------------- fine costanti ----------------
 
 	self.myParent = parent
+	
 	#--------------------- FRAMES -----------------------
 	### Il quadro principale si chiama 'myBox1'
 	self.myBox1 = Frame(parent, 
@@ -101,7 +114,7 @@ class PitkGui:
 	# quadro centrale
 	self.central_square = Frame(self.myBox1,
 		#background = "black",
-		relief=RAISED, borderwidth=1,
+		relief=FLAT, borderwidth=1,
 		padx = 5,
 		pady = 5,
 	)
@@ -152,7 +165,7 @@ class PitkGui:
 		#background="black", foreground="green",
 		text="IP: ", 
 		anchor='w', 
-		font="-weight bold",
+		font=labFont,
 	)
 	self.label1.pack(
 		fill=X, 
@@ -164,7 +177,7 @@ class PitkGui:
 		#background="black", foreground="green",
 		text="Temp: ", 
 		anchor='w', 
-		font="-weight bold",
+		font=labFont,
 	)
 	self.label2.pack(
 		fill=X, 
@@ -176,7 +189,7 @@ class PitkGui:
 		#background="black", foreground="green",
 		text="Date: ", 
 		anchor='w', 
-		font="-weight bold",
+		font=labFont,
 	)
 	self.label3.pack(
 		fill=X, 
@@ -188,7 +201,7 @@ class PitkGui:
 		#background="black", foreground="green",
 		text="Core: ", 
 		anchor='w', 
-		font="-weight bold",
+		font=labFont,
 	)
 	self.label4.pack(
 		fill=X, 
@@ -200,7 +213,7 @@ class PitkGui:
 		#background="black", foreground="green",
 		text="Clock: ", 
 		anchor='w', 
-		font="-weight bold",
+		font=labFont,
 	)
 	self.label5.pack(
 		fill=X, 
@@ -214,7 +227,7 @@ class PitkGui:
 		#background="black", foreground="green",
 		text=get_ip(), 
 		anchor='w', 
-		font="-weight bold",
+		font=labFont,
 	)
 	self.label1var.pack(
 		fill=X, 
@@ -227,7 +240,7 @@ class PitkGui:
 		#background="black", foreground="green",
 		#textvariable=var_temp, 
 		anchor='w', 
-		font="-weight bold",
+		font=labFont,
 	)
 	self.label2var.pack(
 		fill=X, 
@@ -240,7 +253,7 @@ class PitkGui:
 		#background="black", foreground="green",
 	#	textvariable=var_date, 
 		anchor='w', 
-		font="-weight bold",
+		font=labFont,
 	)
 	self.label3var.pack(
 		fill=X, 
@@ -250,7 +263,7 @@ class PitkGui:
 		#background="black", foreground="green",
 		text=get_volts(), 
 		anchor='w', 
-		font="-weight bold",
+		font=labFont,
 	)
 	self.label4var.pack(
 		fill=X, 
@@ -260,7 +273,7 @@ class PitkGui:
 		#background="black", foreground="green",
 		text=get_clock(), 
 		anchor='w', 
-		font="-weight bold",
+		font=labFont,
 	)
 	self.label5var.pack(
 		fill=X, 
@@ -270,44 +283,56 @@ class PitkGui:
 	# Vengono ora aggiunti i pulsanti a 'button_square'
 	#--------------------- TOP BUTTONS -----------------------
 	self.pulsante1 = Button(self.button_square, command = self.buttonPress1)
-	self.pulsante1.configure(text = "startx")
+	self.pulsante1.configure(text = "STARTX")
 	self.pulsante1.focus_force()
 	self.pulsante1.configure(
 	  width = but_width, height = but_height,
-	  padx = but_padx,
-	  pady = but_pady
+	  padx = but_padx, pady = but_pady,
+	  relief = but_relief, borderwidth = but_borderwidth, 
+	  highlightbackground = but_hlbg,
+	  background = but_bg, foreground = but_fg,
+	  font=butFont,
 	  )
 	self.pulsante1.pack(side = LEFT)
 	self.pulsante1.bind("<Return>", self.buttonPress1_a)
 
 	self.pulsante2 = Button(self.button_square, command = self.buttonPress2)
-	self.pulsante2.configure(text = "Exit")
+	self.pulsante2.configure(text = "EXIT")
+	self.pulsante2.focus_force()
 	self.pulsante2.configure(
 	  width = but_width, height = but_height,
-	  padx = but_padx,
-	  pady = but_pady
+	  padx = but_padx, pady = but_pady,
+	  relief = but_relief, borderwidth = but_borderwidth, 
+	  highlightbackground = but_hlbg,
+	  background = but_bg, foreground = but_fg,
+	  font=butFont,
 	  )
 	self.pulsante2.pack(side = RIGHT)
 	self.pulsante2.bind("<Return>", self.buttonPress2_a)
 
 	#-------------------- BOTTOM BUTTONS ----------------------
 	self.pulsante3 = Button(self.bottom_square, command = self.buttonPress3)
-	self.pulsante3.configure(text = "Reboot")
-	self.pulsante3.focus_force()
+	self.pulsante3.configure(text = "REBOOT")
 	self.pulsante3.configure(
 	  width = but_width, height = but_height,
-	  padx = but_padx,
-	  pady = but_pady
+	  padx = but_padx, pady = but_pady,
+	  relief = but_relief, borderwidth = but_borderwidth, 
+	  highlightbackground = but_hlbg,
+	  background = but_bg, foreground = but_fg,
+	  font=butFont,
 	  )
 	self.pulsante3.pack(side = LEFT)
 	self.pulsante3.bind("<Return>", self.buttonPress3_a)
 
 	self.pulsante4 = Button(self.bottom_square, command = self.buttonPress4)
-	self.pulsante4.configure(text = "Shutdown")
+	self.pulsante4.configure(text = "SHUTDOWN")
 	self.pulsante4.configure(
 	  width = but_width, height = but_height,
-	  padx = but_padx,
-	  pady = but_pady
+	  padx = but_padx, pady = but_pady,
+	  relief = but_relief, borderwidth = but_borderwidth, 
+	  highlightbackground = but_hlbg,
+	  background = but_bg, foreground = but_fg,
+	  font=butFont,
 	  )
 	self.pulsante4.pack(side = RIGHT)
 	self.pulsante4.bind("<Return>", self.buttonPress4_a)
