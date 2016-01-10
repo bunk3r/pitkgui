@@ -69,6 +69,10 @@ def get_volts():
 class PitkGui:
   def __init__(self, parent):
 
+	#--- main frame
+	main_bg = "black"
+	main_fg = "white"
+	
 	#--- labels
 	labFont = Font(family="Courier", size=11)
 	labFont.configure(weight = "bold")
@@ -82,9 +86,13 @@ class PitkGui:
 	but_pady = "1m"
 	but_relief = FLAT
 	but_borderwidth = 1
+	but_hlcol = "red"
 	but_hlbg = "red"
-	but_bg = "red"
+	but_bg = "#8B0000"
 	but_fg = "white"
+	but_actbg = "red"
+	but_actfg = "white"
+	
 	#--------------------- fine costanti ----------------
 
 	self.myParent = parent
@@ -92,7 +100,7 @@ class PitkGui:
 	#--------------------- FRAMES -----------------------
 	### Il quadro principale si chiama 'myBox1'
 	self.myBox1 = Frame(parent, 
-		#background="black"
+		background=main_bg,
 	)
 	self.myBox1.pack(side = TOP,
 	  fill = BOTH,
@@ -101,7 +109,7 @@ class PitkGui:
 
 	# Il quadro dei pulsanti alto
 	self.button_square = Frame(self.myBox1,
-		#background = "black",
+		background=main_bg,
 		#relief=RAISED, borderwidth=1
 	)
 	self.button_square.pack(side = TOP,
@@ -113,7 +121,7 @@ class PitkGui:
 
 	# quadro centrale
 	self.central_square = Frame(self.myBox1,
-		#background = "black",
+		background=main_bg,
 		relief=FLAT, borderwidth=1,
 		padx = 5,
 		pady = 5,
@@ -129,7 +137,7 @@ class PitkGui:
 	self.bottom_square = Frame(self.myBox1,
 		padx=5,
 		pady=5,
-		#background = "black",
+		background=main_bg,
 		#relief=RAISED, borderwidth=1
 	)
 	self.bottom_square.pack(side = TOP,
@@ -139,7 +147,7 @@ class PitkGui:
 	
 	# quadro sinistra
 	self.left_square = Frame(self.central_square,
-		#background="black",
+		background=main_bg,
 		#borderwidth = 5,
 		#relief = RIDGE,
 	)
@@ -150,7 +158,7 @@ class PitkGui:
 
 	# quadro destra
 	self.right_square = Frame(self.central_square, 
-		#background="black",
+		background=main_bg,
 		#borderwidth = 5,
 		#relief = RIDGE,
 	)
@@ -162,7 +170,7 @@ class PitkGui:
 	# etichette sinistra
 	# IP
 	self.label1 = Label(self.left_square, 
-		#background="black", foreground="green",
+		background=main_bg, foreground=main_fg,
 		text="IP: ", 
 		anchor='w', 
 		font=labFont,
@@ -174,7 +182,7 @@ class PitkGui:
 	
 	# Temp
 	self.label2 = Label(self.left_square, 
-		#background="black", foreground="green",
+		background=main_bg, foreground=main_fg,
 		text="Temp: ", 
 		anchor='w', 
 		font=labFont,
@@ -186,7 +194,7 @@ class PitkGui:
 	
 	# Date
 	self.label3 = Label(self.left_square, 
-		#background="black", foreground="green",
+		background=main_bg, foreground=main_fg,
 		text="Date: ", 
 		anchor='w', 
 		font=labFont,
@@ -198,7 +206,7 @@ class PitkGui:
 	
 	# Volts
 	self.label4 = Label(self.left_square, 
-		#background="black", foreground="green",
+		background=main_bg, foreground=main_fg,
 		text="Core: ", 
 		anchor='w', 
 		font=labFont,
@@ -210,7 +218,7 @@ class PitkGui:
 	
 	# Clock
 	self.label5 = Label(self.left_square, 
-		#background="black", foreground="green",
+		background=main_bg, foreground=main_fg,
 		text="Clock: ", 
 		anchor='w', 
 		font=labFont,
@@ -224,7 +232,7 @@ class PitkGui:
 	#--------------------- VAR LABELS -----------------------
 	# etichette destra
 	self.label1var = Label(self.right_square, 
-		#background="black", foreground="green",
+		background=main_bg, foreground=main_fg,
 		text=get_ip(), 
 		anchor='w', 
 		font=labFont,
@@ -237,7 +245,7 @@ class PitkGui:
 	#var_temp = StringVar();
 	#var_temp.set(get_temp());
 	self.label2var = Label(self.right_square, 
-		#background="black", foreground="green",
+		background=main_bg, foreground=main_fg,
 		#textvariable=var_temp, 
 		anchor='w', 
 		font=labFont,
@@ -250,7 +258,7 @@ class PitkGui:
 	#var_date = StringVar()
 	#var_date.set(get_date())
 	self.label3var = Label(self.right_square, 
-		#background="black", foreground="green",
+		background=main_bg, foreground=main_fg,
 	#	textvariable=var_date, 
 		anchor='w', 
 		font=labFont,
@@ -260,7 +268,7 @@ class PitkGui:
 		expand = YES
 	)
 	self.label4var = Label(self.right_square, 
-		#background="black", foreground="green",
+		background=main_bg, foreground=main_fg,
 		text=get_volts(), 
 		anchor='w', 
 		font=labFont,
@@ -270,7 +278,7 @@ class PitkGui:
 		expand = YES
 	)
 	self.label5var = Label(self.right_square, 
-		#background="black", foreground="green",
+		background=main_bg, foreground=main_fg,
 		text=get_clock(), 
 		anchor='w', 
 		font=labFont,
@@ -284,12 +292,12 @@ class PitkGui:
 	#--------------------- TOP BUTTONS -----------------------
 	self.pulsante1 = Button(self.button_square, command = self.buttonPress1)
 	self.pulsante1.configure(text = "STARTX")
-	self.pulsante1.focus_force()
 	self.pulsante1.configure(
 	  width = but_width, height = but_height,
 	  padx = but_padx, pady = but_pady,
 	  relief = but_relief, borderwidth = but_borderwidth, 
-	  highlightbackground = but_hlbg,
+	  highlightbackground = but_hlbg, highlightcolor = but_hlcol,
+	  activebackground = but_actbg, activeforeground = but_actfg,
 	  background = but_bg, foreground = but_fg,
 	  font=butFont,
 	  )
@@ -298,12 +306,14 @@ class PitkGui:
 
 	self.pulsante2 = Button(self.button_square, command = self.buttonPress2)
 	self.pulsante2.configure(text = "EXIT")
+	# default focus
 	self.pulsante2.focus_force()
 	self.pulsante2.configure(
 	  width = but_width, height = but_height,
 	  padx = but_padx, pady = but_pady,
 	  relief = but_relief, borderwidth = but_borderwidth, 
-	  highlightbackground = but_hlbg,
+	  highlightbackground = but_hlbg, highlightcolor = but_hlcol,
+	  activebackground = but_actbg, activeforeground = but_actfg,
 	  background = but_bg, foreground = but_fg,
 	  font=butFont,
 	  )
@@ -317,7 +327,8 @@ class PitkGui:
 	  width = but_width, height = but_height,
 	  padx = but_padx, pady = but_pady,
 	  relief = but_relief, borderwidth = but_borderwidth, 
-	  highlightbackground = but_hlbg,
+	  highlightbackground = but_hlbg, highlightcolor = but_hlcol,
+	  activebackground = but_actbg, activeforeground = but_actfg,
 	  background = but_bg, foreground = but_fg,
 	  font=butFont,
 	  )
@@ -330,7 +341,8 @@ class PitkGui:
 	  width = but_width, height = but_height,
 	  padx = but_padx, pady = but_pady,
 	  relief = but_relief, borderwidth = but_borderwidth, 
-	  highlightbackground = but_hlbg,
+	  highlightbackground = but_hlbg, highlightcolor = but_hlcol,
+	  activebackground = but_actbg, activeforeground = but_actfg,
 	  background = but_bg, foreground = but_fg,
 	  font=butFont,
 	  )
